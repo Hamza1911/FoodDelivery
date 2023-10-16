@@ -26,7 +26,7 @@ const Categorie = () => {
             ? " font-semibold text-gray-800"
             : " text-gray-500";
           return (
-            <View key={index} className="flex justify-center items-center mr-6">
+            <View key={index} className="flex mr-6 justify-center items-center ">
               <Pressable
                 onPress={() => setActiveCategory(catagory.id)}
                 className={"p-1 rounded-full shadow" + btnClass}
