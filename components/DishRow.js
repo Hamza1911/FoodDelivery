@@ -1,9 +1,20 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { startTransition } from "react";
 import { themeColor } from "../Theme";
 import * as Icon from "react-native-feather";
+import { useDispatch, useSelector } from "react-redux";
+import { addtoCart, removeFromCart, selectCartItemsByID } from "../Slice/CartSlice";
 
 const DishRow = ({ item }) => {
+  const dispatch =useDispatch()
+  const totalItems =useSelector(state=>selectCartItemsByID(state,item.id))
+  const handleDecrease=()=>{
+    dispatch(removeFromCart({id: item.id}))
+
+  }
+  const handleIncrease=()=>{
+ dispatch(addtoCart({...item}))
+  }
   return (
     <View className="flex-row items-center bg-white p-3 rounded-3xl shadow-2xl mb-3 mx-2">
       <Image
@@ -20,13 +31,16 @@ const DishRow = ({ item }) => {
           <Text className="text-gray-700 text-lg font-bold">${item.price}</Text>
           <View className="flex-row items-center">
             <Pressable
+            onPress={handleDecrease}
+            disabled={!totalItems.length}
               className="p-1 rounded-full"
               style={{ backgroundColor: themeColor.bgColor(1) }}
             >
               <Icon.Minus strokeWidth={2} height={20} width={20} stroke={"white"}/>
             </Pressable>
-            <Text className="px-3">{2}</Text>
+            <Text className="px-3">{totalItems.length}  </Text>
             <Pressable
+            onPress={handleIncrease}
               className="p-1 rounded-full"
               style={{ backgroundColor: themeColor.bgColor(1) }}
             >

@@ -2,9 +2,14 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { themeColor } from "../Theme";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
+import {selectCartItems, selectCartTotal} from "../Slice/CartSlice"
 
 const CartIcon = () => {
     const navigation =useNavigation()
+    const cartTotal =useSelector(selectCartTotal)
+    const CartItems =useSelector(selectCartItems)
+    if(!CartItems.length) return;
   return (
     <View className="absolute bottom-5 w-full z-50">
       <Pressable
@@ -16,13 +21,13 @@ const CartIcon = () => {
           className="p-2 px-4 rounded-full"
           style={{ backgroundColor: "rgba(255,255,255,0.3)" }}
         >
-          <Text className="font-extrabold text-white text-lg">4</Text>
+          <Text className="font-extrabold text-white text-lg">{CartItems.length}</Text>
         </View>
         <Text className="font-extrabold flex-1 text-center text-white text-lg">
           View Cart
         </Text>
         <Text className="font-extrabold  text-white text-lg">
-          ${23}
+          ${cartTotal}
         </Text>
       </Pressable>
     </View>

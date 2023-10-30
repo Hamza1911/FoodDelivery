@@ -5,10 +5,18 @@ import { useNavigation } from "@react-navigation/native";
 import { featured } from "../Constants";
 import { themeColor } from "../Theme";
 import * as Icon from "react-native-feather"
+import { useDispatch, useSelector } from "react-redux";
+import { selectRestaurant } from "../Slice/restaurantSlice";
+import { emptyCart } from "../Slice/CartSlice";
 
 const DeliveryScreen = () => {
   const navigation = useNavigation();
-  const restaurant = featured.restaurants[0];
+  const restaurant = useSelector(selectRestaurant);
+  const dispatch=useDispatch()
+  const cancelOrder=()=>{
+    navigation.navigate("Home");
+    dispatch(emptyCart())
+  }
   return (
     <View className="flex-1">
       {/* MapView */}
@@ -72,7 +80,7 @@ const DeliveryScreen = () => {
             <Pressable className="bg-white p-2 rounded-full">
                 <Icon.Phone stroke={themeColor.bgColor(1)} fill={themeColor.bgColor(1)}/>
             </Pressable>
-            <Pressable onPress={()=>navigation.navigate("Home")} className="bg-white p-2 rounded-full">
+            <Pressable onPress={cancelOrder} className="bg-white p-2 rounded-full">
                 <Icon.X stroke={"red"} strokeWidth={4}/>
             </Pressable>
           </View>

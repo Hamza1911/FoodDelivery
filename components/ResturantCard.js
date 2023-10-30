@@ -10,14 +10,19 @@ import React from "react";
 import * as Icon from "react-native-feather"
 import { themeColor } from "../Theme";
 import { useNavigation } from "@react-navigation/native";
+import { urlFor } from "../Sanity";
 
 
 const ResturantCard = ({ item }) => {
     const navigation=useNavigation()
+    console.log('====================================');
+    console.log("Item Data",item.type);
+    console.log('====================================');
+    
   return (
     <TouchableWithoutFeedback onPress={()=> navigation.navigate("Resturant",{...item})}>
       <View className="mr-6 bg-white rounded-3xl shadow-lg" style={{shadowColor:themeColor.bgColor(0.2),shadowRadius:7}}>
-        <Image className="h-36 w-64 rounded-t-3xl " source={item.image} />
+        <Image className="h-36 w-64 rounded-t-3xl " source={{uri: urlFor(item.image).url()}} />
         <View className="px-3 pb-4 space-y-2">
           <Text className="text-lg font-bold pt-2">{item.name}</Text>
           <View className="flex-row items-center space-x-1">
@@ -28,7 +33,7 @@ const ResturantCard = ({ item }) => {
             <Text className="text-xs">
               <Text className="text-green-700">{item.stars}</Text>
               <Text className="text-gray-700">({item.reviews} review).</Text>
-              <Text className="font-semibold">({item.category})</Text>
+              <Text className="font-semibold">({item?.type?.name})</Text>
             </Text>
           </View>
           <View className="flex-row items-center space-x-1">

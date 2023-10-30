@@ -11,11 +11,11 @@ export const CartSlice = createSlice({
     },
     removeFromCart: (state, action) => {
       const newCart = [...state.items];
-      const itemindex = state.items.findIndex(
-        (item) => item.id == action.payload
+      const itemIndex = state.items.findIndex(
+        (item) => item.id == action.payload.id
       );
-      if (itemindex >= 0) {
-        newCart.splice(itemindex, 1);
+      if (itemIndex >= 0) {
+        newCart.splice(itemIndex, 1);
       } else {
         console.log("cant remove item from cart");
       }
@@ -26,7 +26,7 @@ export const CartSlice = createSlice({
     },
   },
 });
-export const { addtoCart, removeFromCart, emptyCart } = restaurantSlice.actions;
+export const { addtoCart, removeFromCart, emptyCart } = CartSlice.actions;
 export const selectCartItems = (state) => state.cart.items;
 export const selectCartItemsByID = (state,id) => state.cart.items.filter(item=>item.id ===id);
 export const selectCartTotal =state => state.cart.items.reduce((total,item)=> total=total+item.price,0)
