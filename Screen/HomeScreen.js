@@ -13,10 +13,11 @@ const HomeScreen = () => {
   const [featuredRestaurants, setFeaturedRestaurants] = useState([]);
   useEffect(() => {
     getFeaturedResturants().then((data) => {
-    setFeaturedRestaurants(data)  
+    setFeaturedRestaurants(data);   
      });
     
   }, []);
+ 
   return (
     <SafeAreaView className="bg-white">
       <StatusBar barStyle="dark-content" />
@@ -58,6 +59,7 @@ const HomeScreen = () => {
                 title={item.name}
                 restaurants={item.restaurants}
                 description={item.description}
+                
               />
             );
           })}

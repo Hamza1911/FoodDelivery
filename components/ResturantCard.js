@@ -15,14 +15,15 @@ import { urlFor } from "../Sanity";
 
 const ResturantCard = ({ item }) => {
     const navigation=useNavigation()
-    console.log('====================================');
-    console.log("Item Data",item.type);
-    console.log('====================================');
+   
+    
+    // console.log("Image URL", item.image);
+  
     
   return (
     <TouchableWithoutFeedback onPress={()=> navigation.navigate("Resturant",{...item})}>
       <View className="mr-6 bg-white rounded-3xl shadow-lg" style={{shadowColor:themeColor.bgColor(0.2),shadowRadius:7}}>
-        <Image className="h-36 w-64 rounded-t-3xl " source={{uri: urlFor(item.image).url()}} />
+        <Image className="h-36 w-63 rounded-t-3xl " source={{uri: urlFor(item.image).url()}} />
         <View className="px-3 pb-4 space-y-2">
           <Text className="text-lg font-bold pt-2">{item.name}</Text>
           <View className="flex-row items-center space-x-1">

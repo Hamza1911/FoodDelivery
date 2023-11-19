@@ -1,26 +1,28 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import React, { startTransition } from "react";
+import React, { startTransition, useEffect } from "react";
 import { themeColor } from "../Theme";
 import * as Icon from "react-native-feather";
 import { useDispatch, useSelector } from "react-redux";
 import { addtoCart, removeFromCart, selectCartItemsByID } from "../Slice/CartSlice";
+import { urlFor } from "../Sanity";
 
 const DishRow = ({ item }) => {
   const dispatch =useDispatch()
-  const totalItems =useSelector(state=>selectCartItemsByID(state,item.id))
+  const totalItems =useSelector(state=>selectCartItemsByID(state,item._id))
   const handleDecrease=()=>{
-    dispatch(removeFromCart({id: item.id}))
+    dispatch(removeFromCart({id: item._id}))
 
   }
   const handleIncrease=()=>{
  dispatch(addtoCart({...item}))
   }
+
   return (
     <View className="flex-row items-center bg-white p-3 rounded-3xl shadow-2xl mb-3 mx-2">
       <Image
         className="rounded-3xl "
         style={{ height: 100, width: 100 }}
-        source={item.image}
+        source={{uri:urlFor(item.image).url()}}
       />
       <View className="flex flex-1 space-y-3">
         <View className="pl-3">

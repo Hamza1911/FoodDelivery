@@ -22,24 +22,24 @@ const DeliveryScreen = () => {
       {/* MapView */}
       <MapView
         initialRegion={{
-          latitude: restaurant.latitude,
-          longitude: restaurant.longitude,
-          latitudeDelta: 0.01,
-          longitudeDelta: 0.01,
-        }}
-        className="flex-1"
-        mapType="standard"
-      >
-        <Marker
-          coordinate={{
-            latitude: restaurant.latitude,
-            longitude: restaurant.longitude,
-          }}
-          title={restaurant.name}
-          description={restaurant.description}
-          pinColor={themeColor.bgColor(1)}
-        />
-      </MapView>
+            latitude: restaurant.lat,
+            longitude: restaurant.lng,
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01,
+          }} 
+          className="flex-1"
+          mapType="standard"
+        >
+            <Marker 
+                coordinate={{
+                    latitude: restaurant.lat,
+                    longitude: restaurant.lng
+                }} 
+                title={restaurant.name}
+                description={restaurant.description}
+                pinColor={themeColor.bgColor(1)}
+            />
+        </MapView>
       <View className="rounded-t-3xl -mt-12 bg-white relative">
         <View className="flex-row justify-between px-5 pt-10">
           <View>
@@ -69,7 +69,7 @@ const DeliveryScreen = () => {
           >
             <Image
               className="h-16 w-16 rounded-full"
-              source={require("../assets/images/deliveryGuy.png")}
+              source={require("../assets/images/deliveryGuy.jpg")}
             />
           </View>
           <View className="flex-1 ml-3">

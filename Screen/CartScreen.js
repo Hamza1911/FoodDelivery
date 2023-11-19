@@ -14,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { selectRestaurant } from "../Slice/restaurantSlice";
 import { removeFromCart, selectCartItems, selectCartTotal } from "../Slice/CartSlice";
+import { urlFor } from "../Sanity";
 
 const CartScreen = () => {
   const navigation = useNavigation();
@@ -25,10 +26,10 @@ const CartScreen = () => {
   const deliveryfee=2
   useEffect(()=>{
     const items=CartItems.reduce((group,item)=>{
-      if(group[item.id]){
-        group[item.id].push(item)
+      if(group[item._id]){
+        group[item._id].push(item)
 
-      }else{group[item.id]=[item]}
+      }else{group[item._id]=[item]}
       return group
     },[])
     setGroupItem(items)
@@ -83,7 +84,7 @@ const CartScreen = () => {
               <Text className="font-bold" style={{ color: themeColor.text }}>
                 {items.length}
               </Text>
-              <Image className="h-14 w-14 rounded-full" source={dish.image} />
+              <Image className="h-14 w-14 rounded-full" source={{uri:urlFor(dish.image).url()}} />
               <Text className="font-bold flex-1 text-gray-700">
                 {dish.name}
               </Text>

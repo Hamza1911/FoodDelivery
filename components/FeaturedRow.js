@@ -5,9 +5,9 @@ import { themeColor } from "../Theme";
 import ResturantCard from "./ResturantCard";
 
 const FeaturedRow = ({ title, restaurants, description }) => {
-  console.log('====================================');
-  console.log(restaurants);
-  console.log('====================================');
+
+  
+ 
   return (
     <View>
       <View className="flex-row justify-between items-center px-4">

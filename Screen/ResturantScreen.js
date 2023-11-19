@@ -16,6 +16,7 @@ import CartIcon from "../components/CartIcon";
 import { StatusBar } from "expo-status-bar";
 import { useDispatch } from "react-redux";
 import { setRestaurant } from "../Slice/restaurantSlice";
+import { urlFor } from "../Sanity";
 
 const ResturantScreen = () => {
   const { params } = useRoute();
@@ -24,17 +25,18 @@ const ResturantScreen = () => {
   const dispatch =useDispatch()
   // console.log("Resturant",item);
   useEffect(()=>{
-    if (item && item.id ){
+    if (item && item._id ){
       dispatch(setRestaurant({...item}))
+      
     }
-  },[])
+  },[item])
   return (
     <View>
       <CartIcon/>
       <StatusBar style="light"/>
       <ScrollView>
         <View className="relative">
-          <Image className="w-full h-72" source={item.image} />
+          <Image className="w-full h-72" source={{uri: urlFor(item.image).url()}} />
           <Pressable
             onPress={() => navigation.goBack()}
             className="absolute top-14 left-4 bg-gray-50 p-2 rounded-full shadow"
@@ -54,7 +56,7 @@ const ResturantScreen = () => {
             <Text className="text-xs">
               <Text className="text-green-700">{item.stars}</Text>
               <Text className="text-gray-700">({item.reviews} review).</Text>
-              <Text className="font-semibold">({item.category})</Text>
+              <Text className="font-semibold">({item?.type?.name})</Text>
             </Text>
           </View>
           <View className="flex-row items-center space-x-1">

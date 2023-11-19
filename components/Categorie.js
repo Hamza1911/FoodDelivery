@@ -16,7 +16,6 @@ const Categorie = () => {
   useEffect(()=>{
     getCategories().then((data)=>{
       setCategories(data)
-    
     })
   },[])
   return (
@@ -41,7 +40,7 @@ const Categorie = () => {
               >
                <Image
                   style={{width: 45, height: 45}}
-                  source={{ uri: urlFor(category.Image).url() }}
+                  source={{uri:urlFor(category.image).url()}}
                 />
               </Pressable>
               <Text className={"text-sm " + textClass}>{category.name}</Text>
